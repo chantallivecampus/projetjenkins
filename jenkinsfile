@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // Compiler le code
+                        sh 'make'
+                    } else {
+                        // Compiler le code sur Windows
+                        bat 'make'
+                    }
+                }
+            }
+        }
+        stage('Execute') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // Exécuter l'exécutable
+                        sh './mon_programme'
+                    } else {
+                        // Exécuter l'exécutable sur Windows
+                        bat 'mon_programme.exe'
+                    }
+                }
+            }
+        }
+        stage('Permissions') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // Donner les droits d'exécution sur Unix
+                        sh 'chmod +x ./mon_programme'
+                    }
+                }
+            }
+        }
+        stage('Clean') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        // Nettoyer sur Unix
+                        sh 'make clean'
+                    } else {
+                        // Nettoyer sur Windows
+                        bat 'make clean'
+                    }
+                }
+            }
+        }
+    }
+}
