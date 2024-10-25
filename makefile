@@ -1,13 +1,13 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-all: mon_programme
+all: StringInverser
 
-mon_programme: main.o
-    $(CC) -o mon_programme main.o $(CFLAGS)
+StringInverser: main.o
+    $(CC) -o StringInverser main.o $(CFLAGS)
 
 main.o: main.c
     $(CC) -c main.c $(CFLAGS)
 
 clean:
-    rm -f *.o mon_programme
+    rm -f *.o StringInverser
